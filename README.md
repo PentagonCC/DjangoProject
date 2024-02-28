@@ -1,6 +1,6 @@
 # Finance Tracker
 
-Проект-прилложение длля отслеживания финансов.
+Проект-приложение для отслеживания финансов.
 
 ## Запуск проекта для разработки
 
@@ -8,4 +8,5 @@
 - `source first_venv/bin/activate` - вход в виртуальное окружение на macOS и Ubuntu.
 - `first_venv\Scripts\activate.bat` - вход в виртуальное окружение на Windows.
 - `pip install -r requirements.txt ` - установка зависимостей к проекту.
+- `python manage.py migrate` - применение миграций.
 - `python manage.py runserver` - запустить сервер.
