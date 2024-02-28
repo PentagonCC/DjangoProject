@@ -15,12 +15,12 @@ class Transaction(models.Model):
     type_of_transaction = models.CharField(max_length=256)
     amount = models.CharField(max_length=256)
     description = models.CharField(max_length=256)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
 class Category(models.Model):
     description_category = models.CharField(max_length=256)
-    transaction = models.ManyToOneRel(Transaction)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
 
 class Task(models.Model):
@@ -28,4 +28,4 @@ class Task(models.Model):
     status = models.CharField(max_length=256)
     task_name = models.CharField(max_length=256)
     task_description = models.CharField(max_length=256)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
