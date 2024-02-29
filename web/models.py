@@ -1,13 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-Users = get_user_model()
-
-
-class User(models.Model):
-    user_name = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    email = models.CharField(max_length=256)
+User = get_user_model()
 
 
 class Transaction(models.Model):
@@ -15,7 +9,7 @@ class Transaction(models.Model):
     type_of_transaction = models.CharField(max_length=256)
     amount = models.CharField(max_length=256)
     description = models.CharField(max_length=256)
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Category(models.Model):
@@ -28,4 +22,4 @@ class Task(models.Model):
     status = models.CharField(max_length=256)
     task_name = models.CharField(max_length=256)
     task_description = models.CharField(max_length=256)
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
