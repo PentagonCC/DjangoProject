@@ -1,15 +1,15 @@
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.shortcuts import render, redirect
-from datetime import datetime
-from web.forms import RegistrationForm, AuthForm
+from web.forms import RegistrationForm, AuthForm, TaskForm, TransactionForm
+from web.models import Task, Transaction
 
 User = get_user_model()
 
 
 def main_view(request):
-    year = datetime.now().year
+    tasks = Task.objects.all()
     return render(request, 'web/example.html', {
-        'year': year
+        'tasks': tasks
     })
 
 
@@ -48,3 +48,27 @@ def auth_view(request):
 def logout_view(request):
     logout(request)
     return redirect('main')
+
+
+def task_edit_view(request, id =None):
+    task = Task.objects.get(id=id) if id is not None else None
+    form = TaskForm(instance=task)
+    if request.method == 'POST':
+        form = TaskForm(data=request.POST, instance=task, initial={"user": request.user})
+        if form.is_valid():
+            form.save()
+            return redirect("main")
+    return render(request, 'web/task_form.html', {'form': form})
+
+
+def task_delete_view(request, id):
+    task = Task.objects.get(id=id)
+    task.delete()
+    return redirect("main")
+
+
+def transaction_view(request):
+    transaction = Transaction.objects.all()
+    form = TransactionForm
+    return render(request, 'web/transaction.html', {'transaction': transaction, 'form': form})
+

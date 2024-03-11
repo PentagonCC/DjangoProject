@@ -9,10 +9,19 @@
     <nav>
         <a href="{% url 'main' %}">Главная</a>
         {% if user.is_anonymous %}
-            <a href="{% url 'registration' %}">Регистрация</a>
-            <a href="{% url 'auth' %}">Авторизация</a>
+            <div>
+                <a href="{% url 'registration' %}">Регистрация</a>
+                <a href="{% url 'auth' %}">Авторизация</a>
+            </div>
         {% else %}
-            <a href="{% url 'logout' %}">Выход</a>
+            <a href="{% url 'task_add' %}">Создать задачу</a>
+            <a href="{% url 'transaction' %}">Транзакции</a>
+            <div>
+                {% if not user.is_anonymous %}
+                    Вы авторизованы как <b>{{user.username}}</b>
+                {% endif %}
+                <a href="{% url 'logout' %}">Выход</a>
+            </div>
         {% endif %}
     </nav>
     <hr>
