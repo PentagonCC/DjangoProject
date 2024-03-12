@@ -1,0 +1,21 @@
+{% extends 'web/base.html' %}
+{% block content %}
+    <h2>Транзакции</h2>
+    <ul>
+        {% for transactions in transaction %}
+         <li>
+             <b>{{ transactions.amount }}</b>
+             {{ transactions.description }} , {{ transactions.transaction_date }} , {{ transactions.category.name_category }}
+             <a href="{% url 'transaction_delete' transactions.id %}"> Удалить</a>
+         </li>
+        {% endfor %}
+    </ul>
+
+    <b>Добавление транзакции</b>
+
+        <form action="" method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>Сохранить транзакцию</button>
+        </form>
+{% endblock %}
